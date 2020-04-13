@@ -178,11 +178,21 @@ def network_r():
         b_n = data[1]
 
         time.sleep(0.02)
-    
 
-	
-if __name__ == '__main__':
+def server_test():    
+    while True:
 
+        ret, img = cap.read()
+     
+        cv2.imshow('img',img)
+
+        Rn.sendto_Server_img(img)
+        k = cv2.waitKey(20) & 0xff
+        if k == 27:
+            break
+
+
+def main():
     thre_v = threading.Thread(target = vision)
     thre_m = threading.Thread(target = motion)
 
@@ -190,5 +200,10 @@ if __name__ == '__main__':
 
     thre_v.start()
     thre_m.start()
-    thre_ns.start()               
+    thre_ns.start()  
+    
 
+	
+if __name__ == '__main__':
+
+    server_test()
