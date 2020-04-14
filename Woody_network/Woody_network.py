@@ -1,6 +1,8 @@
 import socket
 import json
 
+
+
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 ss_img = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -35,8 +37,8 @@ def recefrom_Rin():
     data = json.loads(raw_data.decode())
     return data
 
-def sendto_Server(image):
-    ss_img.sendto(image.encode(), Server_video_woody)
+def sendto_Server_img(image):
+    s.sendto(image, Server_video_woody)
 
 
 if __name__ == '__main__':

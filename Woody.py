@@ -179,15 +179,21 @@ def network_r():
 
         time.sleep(0.02)
 
-def server_test():    
+def server_test():
+    print('hello!')
     while True:
 
         ret, img = cap.read()
      
         cv2.imshow('img',img)
 
-        Rn.sendto_Server_img(img)
-        k = cv2.waitKey(20) & 0xff
+        result, imgencode = cv2.imencode('.jpg',img)
+        data_encode = np.array(imgencode)
+        str_encode = data_encode.tostring()
+        
+        Wn.sendto_Server_img(str_encode)
+        
+        k = cv2.waitKey(50) & 0xff
         if k == 27:
             break
 
